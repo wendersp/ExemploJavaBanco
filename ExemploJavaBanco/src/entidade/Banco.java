@@ -10,29 +10,37 @@ package entidade;
  * @author wender
  */
 public class Banco {
-    int numero;
-    String nome;
+
+    private int numero;
+    private String nome;
     
+
     public Banco() {
-        this.numero = 0;
-        this.nome = "";
-    }  
-    
-    public Banco(int numero) {
-        this.numero = numero;       
-        this.nome = "";
+        numero = 0;
+        nome = "";
     }
-    
-    public Banco(String nome) {
-        this.numero = 0;
-        this.nome = nome;
-    }
-    
+
     public Banco(int numero, String nome) {
-        this.numero = numero;       
+        this.numero = numero;
+        this.nome = nome;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {        
+        this.numero = numero;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
     
     
-    
+
 }
