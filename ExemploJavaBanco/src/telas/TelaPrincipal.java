@@ -56,6 +56,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMnCadastro.add(jMnItBanco);
 
         jMnItAgencia.setText("Agencia");
+        jMnItAgencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnItAgenciaActionPerformed(evt);
+            }
+        });
         jMnCadastro.add(jMnItAgencia);
 
         jMnItCliente.setText("Cliente");
@@ -112,6 +117,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         BancoFrm bancoFrm = new BancoFrm(this, true);
         bancoFrm.setVisible(true);
     }//GEN-LAST:event_jMnItBancoActionPerformed
+
+    private void jMnItAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnItAgenciaActionPerformed
+         new AgenciaFrm(this,true ).setVisible(true);
+    }//GEN-LAST:event_jMnItAgenciaActionPerformed
 
     /**
      * @param args the command line arguments

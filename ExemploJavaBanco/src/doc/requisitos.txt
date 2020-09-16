@@ -6,7 +6,9 @@ RF03 - O sistema deve permitir cadastrar os cliente da agencia, mantendo as segu
 
 RF04 - O sistema deve permitir abrir um conta para o cliente, mantendo as seguintes informações: a agencia que a conta pertence, numero da conta.
 
-RF04 - O sistema deve permitir o cliente fazer deposito em sua conta; Assim que o cliente efetuar o deposito o sistema deve emitir o saldo para o cliente;
+RF04 - O sistema deve permitir o cliente fazer deposito em sua conta; Assim que o cliente efetuar o deposito o sistema deve emitir o saldo para o cliente; O sistema não deve permitir o cliente realizar um deposito com valor zerado ou negativo;
 
 RF05 - O sistema deve permitir o cliente fazer saque em sua conta; ao realizar o saque o sistema deve verificar se o saldo do cliente é suficiente para a realização do saque;
-Se ouver saldo suficiente realizar o saque e informar o saldo para o cliente;
+Se ouver saldo suficiente, realizar o saque e informar o saldo para o cliente;
+
+Objetos: Banco, Agencia, cleinte, conta; 
