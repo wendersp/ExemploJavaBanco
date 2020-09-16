@@ -1,0 +1,12 @@
+RF01 - O sistema deve permitir cadastrar as seguintes informações do banco: numero e o nome do banco;
+
+RF02 - O Sistema deve permitir cadastrar as seguintes informações das agencias: o banco, numero da agencia, o estado, a cidade e o telefone;
+
+RF03 - O sistema deve permitir cadastrar os cliente da agencia, mantendo as seguintes informações: nome completo do cliente, cpf, numero da carteira de indentidade, filiação (pai e mae), data de nascimento, enderenço completo, celular, email,...;
+
+RF04 - O sistema deve permitir abrir um conta para o cliente, mantendo as seguintes informações: a agencia que a conta pertence, numero da conta.
+
+RF04 - O sistema deve permitir o cliente fazer deposito em sua conta; Assim que o cliente efetuar o deposito o sistema deve emitir o saldo para o cliente;
+
+RF05 - O sistema deve permitir o cliente fazer saque em sua conta; ao realizar o saque o sistema deve verificar se o saldo do cliente é suficiente para a realização do saque;
+Se ouver saldo suficiente realizar o saque e informar o saldo para o cliente;

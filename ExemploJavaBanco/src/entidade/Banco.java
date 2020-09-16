@@ -20,11 +20,6 @@ public class Banco {
         nome = "";
     }
 
-    public Banco(int numero, String nome) {
-        this.numero = numero;
-        this.nome = nome;
-    }
-
     public int getNumero() {
         return numero;
     }

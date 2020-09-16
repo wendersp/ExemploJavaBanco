@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entidade;
 
 /**
@@ -49,9 +44,10 @@ public class Conta {
     public double saque(double valor) {
         if (saldo >= valor) {
             saldo -= valor;
+            saldo();
             return valor;
         } else {
-            System.out.println("Saldo insuficiente...");
+            System.out.println("Saldo insuficiente para realizar o saque...");
             return 0;
         }
     }
@@ -84,6 +80,8 @@ public class Conta {
         return saldo;
     }
 
-    
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 
 }
