@@ -19,38 +19,43 @@ public class BancoTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BancoDao bDao = new BancoDao();
+        BancoDao bancoDao = new BancoDao();
+        
         Banco b1 = new Banco();
         Banco b2 = new Banco();
         Banco b3 = new Banco();
         
         b1.setNumero(1);
         b1.setNome("Banco do Brasil");
-        bDao.adicionar(b1);
+        bancoDao.adicionar(b1);
         
         b2.setNumero(2);
         b2.setNome("Caixa");
-        bDao.adicionar(b2);
+        bancoDao.adicionar(b2);
         
         b3.setNumero(3);
         b3.setNome("Itau");
-        bDao.adicionar(b3);
+        bancoDao.adicionar(b3);
+        
+        
         System.out.println("-------------------------------------------------");
-        List<Banco> listaBanco = bDao.getAll();
+        List<Banco> listaBanco = bancoDao.getAll();
         for (Banco b :listaBanco) {
             System.out.println("Numero.: " + b.getNumero());
             System.out.println("Nome...: " + b.getNome());
         }
         
-        Banco bEdit = bDao.pesquisar(2);
+        Banco bancoEdit = bancoDao.pesquisar(2);
         System.out.println("-----[Editar]------------------------------------");
-        System.out.println("Numero.: " + bEdit.getNumero());
-        System.out.println("Nome...: " + bEdit.getNome());
+        System.out.println("Numero.: " + bancoEdit.getNumero());
+        System.out.println("Nome...: " + bancoEdit.getNome());
         
-        bEdit.setNome("Caixa Economica Federal");
-        bDao.editar(bEdit);
+        bancoEdit.setNome("Caixa Economica Federal");
+        
+        bancoDao.editar(bancoEdit);
+
         System.out.println("-------------------------------------------------");
-        List<Banco> listaBanco2 = bDao.getAll();
+        List<Banco> listaBanco2 = bancoDao.getAll();
         for (Banco b :listaBanco2) {
             System.out.println("Numero.: " + b.getNumero());
             System.out.println("Nome...: " + b.getNome());

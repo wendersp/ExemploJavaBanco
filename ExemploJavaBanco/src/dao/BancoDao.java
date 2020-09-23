@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class BancoDao {
     
-    List<Banco> lstBanco = new ArrayList<>();
+    List<Banco> listaBancos = new ArrayList<>();
     
     public void salvar(Banco banco) {
-        if (lstBanco.contains(banco)) {
+        if (listaBancos.contains(banco)) {
             editar(banco);
         } else {
             adicionar(banco);
@@ -26,32 +26,34 @@ public class BancoDao {
     }
     
     public void adicionar(Banco banco) {        
-        lstBanco.add(banco);        
-    }
-    
-    public void remover(Banco banco) {
-        lstBanco.remove(banco);
+        listaBancos.add(banco);        
     }
     
     public void editar(Banco banco) {
-        int index = lstBanco.indexOf(banco);
+        int index = listaBancos.indexOf(banco);
         if (index > -1) {
-            lstBanco.remove(index);
-            lstBanco.add(index, banco);
+            listaBancos.remove(index);
+            listaBancos.add(index, banco);
         }
     }
     
-    public Banco pesquisar(int numero) {
-        for (Banco b : lstBanco) {
-            if (b.getNumero() == numero) {
-                return b;
+    public void remover(Banco banco) {
+        listaBancos.remove(banco);
+    }
+    
+    
+    
+    public Banco pesquisar(int numeroBanco) {
+        for (Banco banco : listaBancos) {
+            if (banco.getNumero() == numeroBanco) {
+                return banco;                
             }
         }
         return null;
     }
     
     public List<Banco> getAll() {
-        return lstBanco;
+        return listaBancos;
     }
     
 }
