@@ -2,8 +2,9 @@ package entidade;
 
 public class Agencia {
 
+    private Long id;
     private Banco banco;
-    private int numero;
+    private Integer numero;
     private String nome;
     private String estado;
     private String cidade;
@@ -11,6 +12,25 @@ public class Agencia {
     private String cep;
     private String telefone;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    
+    
+    
     public Banco getBanco() {
         return banco;
     }
@@ -19,13 +39,7 @@ public class Agencia {
         this.banco = banco;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+   
 
     public String getNome() {
         return nome;
