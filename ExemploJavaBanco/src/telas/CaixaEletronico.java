@@ -7,8 +7,10 @@ package telas;
 
 import entidade.Agencia;
 import entidade.Banco;
+import entidade.Cidade;
 import entidade.Cliente;
 import entidade.Conta;
+import entidade.Estado;
 
 
 
@@ -38,8 +40,14 @@ public class CaixaEletronico {
         cli01.setRg("126464");
         cli01.setCelular("(64)9999-9988");
         cli01.setEmail("josesilva@gmail.com");
-        cli01.setEstado("GO");
-        cli01.setCidade("SÃO LUIS DE MONTES BELSO");
+        Estado estado = new Estado();
+        estado.setNome("GOIAS");
+        estado.setSigla("GO");
+        Cidade cidade = new Cidade();
+        cidade.setEstado(estado);
+        cidade.setNome("São Luis de Montes Belos");
+        
+        cli01.setCidade(cidade);
         cli01.setEndereco("AV. HERMOGENES COELHO");
         cli01.setNomeMae("MARIA DA SILVA");
         cli01.setNomePai("JOAO DA SILVA");
@@ -50,15 +58,14 @@ public class CaixaEletronico {
         conta.setNumero(21009);
         conta.setCliente(cli01);
         
-        conta.deposito(50);
+        conta.depositar(50.0);
+        System.out.println("-----------------------------------");        
         System.out.println("-----------------------------------");
-        conta.info();
+        System.out.println("saque: " + conta.sacar(60.0));
         System.out.println("-----------------------------------");
-        System.out.println("saque: " + conta.saque(60));
+        conta.depositar(150.0);     
         System.out.println("-----------------------------------");
-        conta.deposito(150);     
-        System.out.println("-----------------------------------");
-        System.out.println("saque: " + conta.saque(60));
+        System.out.println("saque: " + conta.sacar(60.0));
         
         
         

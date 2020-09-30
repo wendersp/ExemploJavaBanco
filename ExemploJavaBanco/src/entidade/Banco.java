@@ -1,30 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entidade;
 
-/**
- *
- * @author wender
- */
 public class Banco {
 
     private int numero;
     private String nome;
-    
-
-    public Banco() {
-        numero = 0;
-        nome = "";
-    }
 
     public int getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {        
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -35,7 +20,5 @@ public class Banco {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    
 
 }

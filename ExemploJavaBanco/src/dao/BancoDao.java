@@ -25,11 +25,11 @@ public class BancoDao {
         }
     }
     
-    public void adicionar(Banco banco) {        
+    private void adicionar(Banco banco) {        
         listaBancos.add(banco);        
     }
     
-    public void editar(Banco banco) {
+    private void editar(Banco banco) {
         int index = listaBancos.indexOf(banco);
         if (index > -1) {
             listaBancos.remove(index);

@@ -1,63 +1,52 @@
 package entidade;
 
-/**
- *
- * @author wender
- */
+import java.util.Date;
+
 public class Conta {
 
-    private int numero;
+    private Long id;
     private Cliente cliente;
     private Agencia agencia;
-    private double saldo;
+    private Integer numero;
+    private Double saldo;
+    private Date dataAbertura;
+    private String senha;
 
-    public Conta() {
-        this.numero = 0;
-        this.cliente = new Cliente();
-        this.agencia = new Agencia();
-        this.saldo = 0;
+    
+    public void depositar(Double valor) {
+        if (valor > 0) {
+           saldo = saldo + valor; 
+           System.out.println("Deposito realizado com sucesso!...");
+        } else {
+            System.out.println("Valor do deposito é invalido!");
+        }        
     }
-
-    public void saldo() {
+    
+    public Double sacar(double valor) {
+        if (valor > 0) {
+            if (valor > saldo) {
+                saldo = saldo - valor;
+                return valor;
+            } else {
+                System.out.println("Saldo insuficiente!...");
+            }
+        } else {
+            System.out.println("valor do saque é invalido!");
+        }
+        return 0.0;
+    }
+    
+    public void emitirSaldo() {
         System.out.println("Saldo: " + saldo);
     }
-
-    public void info() {
-        System.out.println("Numero Banco....: " + agencia.getBanco().getNumero());
-        System.out.println("Nome Banco......: " + agencia.getBanco().getNome());
-        System.out.println("Agencia.........: " + agencia.getNumero());
-        System.out.println("Numero conta....: " + numero);
-        System.out.println("Nome do Cliente.: " + cliente.getNome());
-        System.out.println("CPF.............: " + cliente.getCpf());
-        saldo();
+    
+    
+    public Long getId() {
+        return id;
     }
 
-    public void deposito(double valor) {
-        if (valor > 0) {
-            saldo += valor;
-            saldo();
-        } else {
-            System.out.println("Valor do deposito é invalido...");
-        }
-    }
-
-    public double saque(double valor) {
-        if (saldo >= valor) {
-            saldo -= valor;
-            saldo();
-            return valor;
-        } else {
-            System.out.println("Saldo insuficiente para realizar o saque...");
-            return 0;
-        }
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Cliente getCliente() {
@@ -76,12 +65,36 @@ public class Conta {
         this.agencia = agencia;
     }
 
-    public double getSaldo() {
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public Double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+//    public void setSaldo(Double saldo) {
+//        this.saldo = saldo;
+//    }
+
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 }

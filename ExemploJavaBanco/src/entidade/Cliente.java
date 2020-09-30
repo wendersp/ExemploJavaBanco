@@ -1,33 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package entidade;
 
 import java.util.Date;
 
-/**
- *
- * @author wender
- */
+
 public class Cliente {
-    
+   
+    private Long id;
     private String nome;
     private String cpf;
-    private String rg;
     private Date dataNascimento;
-    private String nomeMae;
+    private String rg;
+    private String endereco;
+    private String bairro;
+    private Cidade cidade;
     private String nomePai;
+    private String nomeMae;
     private String celular;
     private String email;
-    private String estado;
-    private String cidade;
-    private String bairro;
-    private String endereco;
-    
-    public Cliente() {
-        
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -46,14 +43,6 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
     public Date getDataNascimento() {
         return dataNascimento;
     }
@@ -62,12 +51,36 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getNomeMae() {
-        return nomeMae;
+    public String getRg() {
+        return rg;
     }
 
-    public void setNomeMae(String nomeMae) {
-        this.nomeMae = nomeMae;
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
     }
 
     public String getNomePai() {
@@ -76,6 +89,14 @@ public class Cliente {
 
     public void setNomePai(String nomePai) {
         this.nomePai = nomePai;
+    }
+
+    public String getNomeMae() {
+        return nomeMae;
+    }
+
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
     }
 
     public String getCelular() {
@@ -93,40 +114,6 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-    
-    
     
     
     

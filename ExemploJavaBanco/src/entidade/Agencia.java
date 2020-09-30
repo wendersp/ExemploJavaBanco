@@ -1,29 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entidade;
 
-/**
- *
- * @author wender
- */
 public class Agencia {
-    
+
     private Banco banco;
     private int numero;
+    private String nome;
     private String estado;
     private String cidade;
+    private String endereco;
+    private String cep;
     private String telefone;
-    
-    public Agencia() {
-        banco =  new Banco();
-        numero = 0;
-        estado = "";
-        cidade = "";
-        telefone = "";
-    }
 
     public Banco getBanco() {
         return banco;
@@ -39,6 +25,14 @@ public class Agencia {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEstado() {
@@ -57,6 +51,22 @@ public class Agencia {
         this.cidade = cidade;
     }
 
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -64,7 +74,7 @@ public class Agencia {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
-    
-    
+
+  
+
 }

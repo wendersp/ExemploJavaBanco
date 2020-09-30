@@ -1,11 +1,11 @@
 RF01 - O sistema deve permitir cadastrar as seguintes informações do banco: numero e o nome do banco;
 
 RF02 - O Sistema deve permitir cadastrar as seguintes informações das agencias: o banco, 
-numero da agencia, o estado, a cidade e o telefone;
+numero da agencia, nome, o estado, a cidade e o telefone;
 
 RF03 - O sistema deve permitir cadastrar os cliente da agencia, mantendo as seguintes informações: 
 nome completo do cliente, cpf, numero da carteira de indentidade, filiação (pai e mae), 
-ata de nascimento, enderenço completo, celular, email,...;
+data de nascimento, enderenço completo, celular, email,...;
 
 RF04 - O sistema deve permitir abrir um conta para o cliente, mantendo as seguintes informações: 
 a agencia que a conta pertence, numero da conta.
@@ -21,7 +21,15 @@ RF05.1 - se o saldo não for suficiente para a realização do saque mostrar um 
 suficiente para realizar o saque;Se ouver saldo suficiente, realizar o saque e informar o saldo para o cliente;
 
 
-RNF-01- O Sistema deve realizar um saque em 3seg;
-RNF-02- O sistema deve ser desenvolvido na linguagem java;
-RNF-03- O sistema de gerenciamento de dados deve ser DB2;
+Objetos: 
+Banco: Atributos: numero, nome; 
+Agencia: Atributos: Banco, numero, nome, estado, cidade, telefone;
+Cliente: Atributos: nome, cpf, data de nascimento, rg, endereço, bairro, cidade, estado, nome do pai,
+         nome da mãe, celular e email;
+Conta: Atributos: cliente, banco, agencia, numero, data de abertura, senha;
+       Metodos: deposito, emitirSaldo, saque,  
+
+
+
+
 

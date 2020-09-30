@@ -27,15 +27,15 @@ public class BancoTest {
         
         b1.setNumero(1);
         b1.setNome("Banco do Brasil");
-        bancoDao.adicionar(b1);
+        bancoDao.salvar(b1);
         
         b2.setNumero(2);
         b2.setNome("Caixa");
-        bancoDao.adicionar(b2);
+        bancoDao.salvar(b2);
         
         b3.setNumero(3);
         b3.setNome("Itau");
-        bancoDao.adicionar(b3);
+        bancoDao.salvar(b3);
         
         
         System.out.println("-------------------------------------------------");
@@ -52,7 +52,7 @@ public class BancoTest {
         
         bancoEdit.setNome("Caixa Economica Federal");
         
-        bancoDao.editar(bancoEdit);
+        bancoDao.salvar(bancoEdit);
 
         System.out.println("-------------------------------------------------");
         List<Banco> listaBanco2 = bancoDao.getAll();
