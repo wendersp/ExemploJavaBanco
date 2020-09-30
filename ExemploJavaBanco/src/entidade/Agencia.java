@@ -2,6 +2,7 @@ package entidade;
 
 public class Agencia {
 
+    //id da agencia
     private Long id;
     private Banco banco;
     private Integer numero;
