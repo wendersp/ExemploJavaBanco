@@ -2,6 +2,7 @@ package entidade;
 
 public class Banco {
 
+    
     private Long id;
     private Integer numero;
     private String nome;
