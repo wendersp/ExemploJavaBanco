@@ -5,11 +5,13 @@
  */
 package dao;
 
-import entidade.Banco;
 import entidade.Estado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,10 +28,10 @@ public class EstadoDao {
 
     public void insert(Estado estado) {
         iniciarConexaoDB();
-        String sqlInsert = "INSERT INTO estado (nome, sigla)"
+        String sql = "INSERT INTO estado (nome, sigla)"
                 + " VALUES (?,?)";
         try {
-            PreparedStatement pstmt = con.prepareStatement(sqlInsert);
+            PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, estado.getNome());
             pstmt.setString(2, estado.getSigla());
             pstmt.execute();
@@ -37,6 +39,66 @@ public class EstadoDao {
         } catch (SQLException ex) {
             System.out.println("Erro ao inserir o estado. " + ex.getMessage());
         }
+    }
+
+    public void update(Estado estado) {
+         iniciarConexaoDB();
+        String sql = "UPDATE estado SET nome = ?, sigla = ? "
+                + " WHERE id = ?";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, estado.getNome());
+            pstmt.setString(2, estado.getSigla());
+            pstmt.setInt(3, estado.getId());
+            pstmt.execute();
+            System.out.println("Estado atualizado com sucesso!...");
+        } catch (SQLException ex) {
+            System.out.println("Erro ao atualizar o estado. " + ex.getMessage());
+        }
+    }
+    
+    public Estado pesquisar(int id) {
+        iniciarConexaoDB();
+        Estado estado = null;
+        String sql = "SELECT id, nome, sigla FROM estado WHERE id = ?";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet resultado = pstmt.executeQuery();
+            if (resultado.next()) {
+                estado = new Estado();
+                estado.setId(resultado.getInt("id"));
+                estado.setNome(resultado.getString("nome"));
+                estado.setSigla(resultado.getString("sigla"));                 
+            }
+            return estado;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao pesquisar Estado por Id. " + ex.getMessage());
+            return null;
+        }      
+    }
+    
+    public List<Estado> pesquisar(String nome) {
+        iniciarConexaoDB();
+        Estado estado;
+        List<Estado> lstEstados = new ArrayList();
+        String sql = "SELECT id, nome, sigla FROM estado WHERE nome LIKE ?";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, nome + "%");
+            ResultSet resultado = pstmt.executeQuery();
+            while (resultado.next()) {
+                estado = new Estado();
+                estado.setId(resultado.getInt("id"));
+                estado.setNome(resultado.getString("nome"));
+                estado.setSigla(resultado.getString("sigla"));  
+                lstEstados.add(estado);
+            }
+            return lstEstados;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao pesquisar Estado por Nome. " + ex.getMessage());
+            return null;
+        }      
     }
 
 }
