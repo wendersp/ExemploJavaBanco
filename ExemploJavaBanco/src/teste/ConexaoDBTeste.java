@@ -1,4 +1,4 @@
-package telas;
+package teste;
 
 import dao.EstadoDao;
 import entidade.Estado;
