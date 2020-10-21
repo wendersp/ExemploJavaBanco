@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +23,16 @@ public class EstadoDao {
         con = conexaoDB.getConexaoDB();
     }
 
-    public void insert(Estado estado) {
+    public void salvar(Estado estado) {
+        if (estado.getId() != null) {
+            this.update(estado);
+        } else {
+            this.insert(estado);
+        }
+    }
+    
+    
+    private void insert(Estado estado) {
         iniciarConexaoDB();
         String sql = "INSERT INTO estado (nome, sigla)"
                 + " VALUES (?,?)";
@@ -31,13 +41,14 @@ public class EstadoDao {
             pstmt.setString(1, estado.getNome());
             pstmt.setString(2, estado.getSigla());
             pstmt.execute();
-            System.out.println("Estado inserido com sucesso!...");
+            //System.out.println("Estado inserido com sucesso!...");
+            JOptionPane.showMessageDialog(null,"Estado inserido com sucesso!...");
         } catch (SQLException ex) {
-            System.out.println("Erro ao inserir o estado. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao inserir o estado. " + ex.getMessage());
         }
     }
 
-    public void update(Estado estado) {
+    private void update(Estado estado) {
          iniciarConexaoDB();
         String sql = "UPDATE estado SET nome = ?, sigla = ? "
                 + " WHERE id = ?";
@@ -47,12 +58,25 @@ public class EstadoDao {
             pstmt.setString(2, estado.getSigla());
             pstmt.setInt(3, estado.getId());
             pstmt.execute();
-            System.out.println("Estado atualizado com sucesso!...");
+            JOptionPane.showMessageDialog(null,"Estado atualizado com sucesso!...");
         } catch (SQLException ex) {
-            System.out.println("Erro ao atualizar o estado. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao atualizar o estado. " + ex.getMessage());
         }
     }
     
+    public void excluir(Estado estado) {
+        iniciarConexaoDB();
+        String sql = "DELETE FROM estado WHERE id = ?";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);            
+            pstmt.setInt(1, estado.getId());
+            pstmt.execute();
+            JOptionPane.showMessageDialog(null,"Estado excluido com sucesso!...");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao excluir o estado. " + ex.getMessage());
+        }
+    }
+        
     public Estado pesquisar(int id) {
         iniciarConexaoDB();
         Estado estado = null;
@@ -69,7 +93,7 @@ public class EstadoDao {
             }
             return estado;
         } catch (SQLException ex) {
-            System.out.println("Erro ao pesquisar Estado por Id. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao pesquisar Estado por Id. " + ex.getMessage());
             return null;
         }      
     }
@@ -92,7 +116,7 @@ public class EstadoDao {
             }
             return lstEstados;
         } catch (SQLException ex) {
-            System.out.println("Erro ao pesquisar Estado por Nome. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao pesquisar Estado por Nome. " + ex.getMessage());
             return null;
         }      
     }

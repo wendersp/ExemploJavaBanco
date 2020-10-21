@@ -29,6 +29,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMnCadastro = new javax.swing.JMenu();
+        jMnItEstado = new javax.swing.JMenuItem();
         jMnItBanco = new javax.swing.JMenuItem();
         jMnItAgencia = new javax.swing.JMenuItem();
         jMnItCliente = new javax.swing.JMenuItem();
@@ -45,6 +46,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMnCadastro.setMnemonic('C');
         jMnCadastro.setText("Cadastro");
+
+        jMnItEstado.setText("Estado");
+        jMnItEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnItEstadoActionPerformed(evt);
+            }
+        });
+        jMnCadastro.add(jMnItEstado);
 
         jMnItBanco.setMnemonic('B');
         jMnItBanco.setText("Banco");
@@ -122,6 +131,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
          new AgenciaFrm(this,true ).setVisible(true);
     }//GEN-LAST:event_jMnItAgenciaActionPerformed
 
+    private void jMnItEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnItEstadoActionPerformed
+          new EstadoFrm(this, true).setVisible(true);
+    }//GEN-LAST:event_jMnItEstadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -165,6 +178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnItCliente;
     private javax.swing.JMenuItem jMnItConta;
     private javax.swing.JMenuItem jMnItDeposito;
+    private javax.swing.JMenuItem jMnItEstado;
     private javax.swing.JMenuItem jMnItSair;
     private javax.swing.JMenuItem jMnItSaldo;
     private javax.swing.JMenuItem jMnItSaque;
