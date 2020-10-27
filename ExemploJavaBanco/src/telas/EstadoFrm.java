@@ -2,6 +2,7 @@ package telas;
 
 import dao.EstadoDao;
 import entidade.Estado;
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,10 +41,6 @@ public class EstadoFrm extends javax.swing.JDialog {
         jBtnSalvar = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
         jBtnFechar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jTxfCodigoPesq = new javax.swing.JTextField();
-        jBtnPesq = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Estado");
@@ -75,7 +72,7 @@ public class EstadoFrm extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxfSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTxfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 296, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,41 +150,6 @@ public class EstadoFrm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel4.setText("Pesquisar por Id");
-
-        jBtnPesq.setText("Pesq");
-        jBtnPesq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPesqActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxfCodigoPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnPesq)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTxfCodigoPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnPesq))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,17 +157,14 @@ public class EstadoFrm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,10 +173,6 @@ public class EstadoFrm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBtnPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesqActionPerformed
-        this.botaoPesq();
-    }//GEN-LAST:event_jBtnPesqActionPerformed
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         this.botaoNovo();
@@ -281,36 +236,45 @@ public class EstadoFrm extends javax.swing.JDialog {
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnFechar;
     private javax.swing.JButton jBtnNovo;
-    private javax.swing.JButton jBtnPesq;
     private javax.swing.JButton jBtnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTxfCodigo;
-    private javax.swing.JTextField jTxfCodigoPesq;
     private javax.swing.JTextField jTxfNome;
     private javax.swing.JTextField jTxfSigla;
     // End of variables declaration//GEN-END:variables
 
     private Estado estado;
     private EstadoDao estadoDao;
-
+    
+    private void centralizarTela() {
+        Dimension tamanhoTela = getToolkit().getScreenSize();
+        Dimension tamanho = getSize();
+        setLocation((tamanhoTela.width - tamanho.width) / 2, 90);
+    }
+    
+    
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+        mostrarDadosFrom();        
+    }
+    
     private void iniciarForm() {
+        this.centralizarTela();
         estado = new Estado();
         limparDadosFrom();
         jBtnNovo.setEnabled(false);
         jBtnSalvar.setEnabled(true);
         jBtnExcluir.setEnabled(false);
     }
-
+    
     private void botaoFechar() {
         this.dispose();
     }
-
+    
     private void botaoNovo() {
         estado = new Estado();
         jBtnNovo.setEnabled(false);
@@ -318,7 +282,7 @@ public class EstadoFrm extends javax.swing.JDialog {
         jBtnExcluir.setEnabled(false);
         mostrarDadosFrom();
     }
-
+    
     private void botaoSalvar() {
         if (estadoDao == null) {
             estadoDao = new EstadoDao();
@@ -326,71 +290,59 @@ public class EstadoFrm extends javax.swing.JDialog {
         obterDadosFrom();
         if ((estado.getNome() != null) && (!estado.getNome().isEmpty())) {
             estadoDao.salvar(estado);
-            limparDadosFrom();
+            botaoNovo();
         } else {
             JOptionPane.showMessageDialog(null, "Informe o nome do estado.");
         }
         
-        
     }
-
+    
     private void botaoExcluir() {
         if (estadoDao == null) {
             estadoDao = new EstadoDao();
         }
         estadoDao.excluir(estado);
-
+        
         jBtnNovo.setEnabled(false);
         jBtnSalvar.setEnabled(true);
         jBtnExcluir.setEnabled(false);
         estado = new Estado();
-
+        
         limparDadosFrom();
     }
-
-    private void botaoPesq() {
-        if (estadoDao == null) {
-            estadoDao = new EstadoDao();
-        }
-        if (jTxfCodigoPesq.getText() != null) {
-            int idPesq = Integer.parseInt(jTxfCodigoPesq.getText());
-            estado = estadoDao.pesquisar(idPesq);
-            jTxfCodigoPesq.setText("");
-            mostrarDadosFrom();
-            if (estado != null && estado.getId() != null) {
-                jBtnNovo.setEnabled(true);
-                jBtnSalvar.setEnabled(true);
-                jBtnExcluir.setEnabled(true);
-            } else {
-                jBtnNovo.setEnabled(false);
-                jBtnSalvar.setEnabled(true);
-                jBtnExcluir.setEnabled(false);
-                estado = new Estado();
-            }
-        }
-
-    }
-
+    
     private void mostrarDadosFrom() {
         if (estado != null) {
-            jTxfCodigo.setText(String.valueOf(estado.getId()));
+            if (this.estado.getId() != null) {
+                jTxfCodigo.setText(String.valueOf(estado.getId()));
+            } else {
+                jTxfCodigo.setText("");
+            }
             jTxfNome.setText(estado.getNome());
             jTxfSigla.setText(estado.getSigla());
         } else {
             limparDadosFrom();
         }
+        if (this.estado.getId() != null) {
+            jBtnNovo.setEnabled(true);
+            jBtnSalvar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+        } else {
+            jBtnNovo.setEnabled(false);
+            jBtnSalvar.setEnabled(true);
+            jBtnExcluir.setEnabled(false);
+        }
     }
-
+    
     private void obterDadosFrom() {
         estado.setNome(jTxfNome.getText());
         estado.setSigla(jTxfSigla.getText());
     }
-
+    
     private void limparDadosFrom() {
-        jTxfCodigoPesq.setText("");
         jTxfCodigo.setText("");
         jTxfNome.setText("");
         jTxfSigla.setText("");
     }
-
+    
 }

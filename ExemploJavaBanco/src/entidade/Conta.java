@@ -24,7 +24,7 @@ public class Conta {
     
     public Double sacar(double valor) {
         if (valor > 0) {
-            if (valor > saldo) {
+            if (verificarSaldoSuficiente(valor)) {
                 saldo = saldo - valor;
                 return valor;
             } else {
@@ -34,6 +34,14 @@ public class Conta {
             System.out.println("valor do saque é invalido!");
         }
         return 0.0;
+    }
+    
+    private boolean verificarSaldoSuficiente(Double valor) {        
+            if (valor > saldo) {
+              return true;
+            } else {
+                return false;
+            }        
     }
     
     public void emitirSaldo() {

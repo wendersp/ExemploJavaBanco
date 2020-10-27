@@ -5,6 +5,18 @@
  */
 package telas;
 
+import dao.EstadoDao;
+import entidade.Estado;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
+import telas.tableModel.EstadoColumnModel;
+import telas.tableModel.EstadoTableModel;
+
 /**
  *
  * @author wender
@@ -17,6 +29,8 @@ public class EstadoCons extends javax.swing.JDialog {
     public EstadoCons(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.centralizarTela();        
+        this.formatarColumnJTable();
     }
 
     /**
@@ -29,24 +43,29 @@ public class EstadoCons extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jCboPesquisarPor = new javax.swing.JComboBox<>();
+        jTxfPesquisarValor = new javax.swing.JTextField();
+        jBtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTbEstado = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jBtnFechar = new javax.swing.JButton();
+        jBtnNovo = new javax.swing.JButton();
+        jBtnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Estado");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Codigo", "Sigla" }));
+        jCboPesquisarPor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Codigo", "Sigla" }));
 
-        jButton1.setText("Pesquisar");
+        jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -54,11 +73,11 @@ public class EstadoCons extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCboPesquisarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTxfPesquisarValor, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jBtnPesquisar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -66,13 +85,13 @@ public class EstadoCons extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jCboPesquisarPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxfPesquisarValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnPesquisar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTbEstado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -83,15 +102,30 @@ public class EstadoCons extends javax.swing.JDialog {
                 "Código", "Nome", "Sigla"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTbEstado);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton2.setText("Fechar");
+        jBtnFechar.setText("Fechar");
+        jBtnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnFecharActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Novo");
+        jBtnNovo.setText("Novo");
+        jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Editar");
+        jBtnEditar.setText("Editar");
+        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,11 +133,11 @@ public class EstadoCons extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(jBtnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jBtnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(jBtnFechar)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -111,9 +145,9 @@ public class EstadoCons extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jBtnFechar)
+                    .addComponent(jBtnNovo)
+                    .addComponent(jBtnEditar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -146,6 +180,22 @@ public class EstadoCons extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFecharActionPerformed
+        botaoFechar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnFecharActionPerformed
+
+    private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
+        botaoNovo();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnNovoActionPerformed
+
+    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        botaoEditar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnEditarActionPerformed
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+        botaoPesquisar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,15 +240,92 @@ public class EstadoCons extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jBtnEditar;
+    private javax.swing.JButton jBtnFechar;
+    private javax.swing.JButton jBtnNovo;
+    private javax.swing.JButton jBtnPesquisar;
+    private javax.swing.JComboBox<String> jCboPesquisarPor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTbEstado;
+    private javax.swing.JTextField jTxfPesquisarValor;
     // End of variables declaration//GEN-END:variables
+
+    private List<Estado> listaEstado;
+    private EstadoDao estadoDao;
+    private EstadoFrm estadoFrm;
+    
+    private void centralizarTela() {
+        Dimension tamanhoTela = getToolkit().getScreenSize();
+        Dimension tamanho = getSize();
+        setLocation((tamanhoTela.width - tamanho.width) / 2, 90);
+    }
+    
+    private void formatarColumnJTable() {
+        FontMetrics fm = jTbEstado.getFontMetrics(jTbEstado.getFont());
+        jTbEstado.setColumnModel(new EstadoColumnModel(fm));
+    }
+    
+    /*
+    adicionar a lista de estado no JTable
+    */
+    private EstadoTableModel model = new EstadoTableModel();    
+    private void setListaEstado(List<Estado> listaEstado) {        
+        this.jTbEstado.setModel(model);        
+        model.addListaDeEstado(listaEstado);        
+        this.formatarColumnJTable();
+    }
+    /*
+    pegar o estado selecionado no JTable
+    */
+    public Estado getEstadoSelecionado() {
+        return model.getEstado(jTbEstado.getSelectedRow());
+    }
+    
+    
+    private String param[] = new String[2];    
+    private void getParametroPesquisa() {        
+        param[0] = jCboPesquisarPor.getSelectedItem().toString().toUpperCase();
+        param[1] = jTxfPesquisarValor.getText().toUpperCase();        
+    }
+    
+    
+    private void botaoPesquisar() {
+        getParametroPesquisa();
+        if (this.estadoDao == null) {
+            this.estadoDao = new EstadoDao();
+        }
+        this.listaEstado = new ArrayList<>();
+        
+        if (param[0].equals("CODIGO")) {
+            this.listaEstado.add(this.estadoDao.pesquisar(Integer.parseInt(param[1])));
+        } else if (param[0].equals("SIGLA")) {
+            this.listaEstado = this.estadoDao.pesquisarPorSigla(param[1]);
+        } else {
+            this.listaEstado = this.estadoDao.pesquisar(param[1]);
+        }
+        this.setListaEstado(this.listaEstado);
+    }
+    
+    private void botaoFechar(){
+        dispose();
+    }
+    
+    private void botaoNovo() {
+        if (this.estadoFrm == null) {
+            estadoFrm = new EstadoFrm(new JFrame(), true);
+        }
+        estadoFrm.setEstado(new Estado());
+        estadoFrm.setVisible(true);
+    }
+    
+    private void botaoEditar() {
+        if (this.estadoFrm == null) {
+            estadoFrm = new EstadoFrm(new JFrame(), true);
+        }
+        estadoFrm.setEstado(getEstadoSelecionado());
+        estadoFrm.setVisible(true);
+    }
+
 }

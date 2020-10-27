@@ -5,6 +5,8 @@
  */
 package telas;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author wender
@@ -16,6 +18,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        //Maximizar a tela
+        this.setExtendedState(MAXIMIZED_BOTH); 
+
     }
 
     /**
@@ -132,7 +137,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMnItAgenciaActionPerformed
 
     private void jMnItEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnItEstadoActionPerformed
-          new EstadoFrm(this, true).setVisible(true);
+          new EstadoCons(this, true).setVisible(true);
     }//GEN-LAST:event_jMnItEstadoActionPerformed
 
     /**

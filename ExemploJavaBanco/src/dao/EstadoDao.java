@@ -42,7 +42,7 @@ public class EstadoDao {
             pstmt.setString(2, estado.getSigla());
             pstmt.execute();
             //System.out.println("Estado inserido com sucesso!...");
-            JOptionPane.showMessageDialog(null,"Estado inserido com sucesso!...");
+            JOptionPane.showMessageDialog(null,"Estado inserido com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao inserir o estado. " + ex.getMessage());
         }
@@ -58,7 +58,8 @@ public class EstadoDao {
             pstmt.setString(2, estado.getSigla());
             pstmt.setInt(3, estado.getId());
             pstmt.execute();
-            JOptionPane.showMessageDialog(null,"Estado atualizado com sucesso!...");
+            JOptionPane.showMessageDialog(null,
+                    "Estado atualizado com sucesso");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao atualizar o estado. " + ex.getMessage());
         }
@@ -71,9 +72,11 @@ public class EstadoDao {
             PreparedStatement pstmt = con.prepareStatement(sql);            
             pstmt.setInt(1, estado.getId());
             pstmt.execute();
-            JOptionPane.showMessageDialog(null,"Estado excluido com sucesso!...");
+            JOptionPane.showMessageDialog(null,
+                    "Estado excluido com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao excluir o estado. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao excluir o estado. " 
+                    + ex.getMessage());
         }
     }
         
@@ -93,7 +96,7 @@ public class EstadoDao {
             }
             return estado;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao pesquisar Estado por Id. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao pesquisar Estado por Id." + ex.getMessage());
             return null;
         }      
     }
@@ -117,6 +120,29 @@ public class EstadoDao {
             return lstEstados;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao pesquisar Estado por Nome. " + ex.getMessage());
+            return null;
+        }      
+    }
+    
+    public List<Estado> pesquisarPorSigla(String sigla) {
+        iniciarConexaoDB();
+        Estado estado;
+        List<Estado> lstEstados = new ArrayList();
+        String sql = "SELECT id, nome, sigla FROM estado WHERE sigla = ?";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, sigla);
+            ResultSet resultado = pstmt.executeQuery();
+            while (resultado.next()) {
+                estado = new Estado();
+                estado.setId(resultado.getInt("id"));
+                estado.setNome(resultado.getString("nome"));
+                estado.setSigla(resultado.getString("sigla"));  
+                lstEstados.add(estado);
+            }
+            return lstEstados;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao pesquisar Estado por Sigla. " + ex.getMessage());
             return null;
         }      
     }
