@@ -35,6 +35,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMnCadastro = new javax.swing.JMenu();
         jMnItEstado = new javax.swing.JMenuItem();
+        jMnItCidade = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMnItBanco = new javax.swing.JMenuItem();
         jMnItAgencia = new javax.swing.JMenuItem();
         jMnItCliente = new javax.swing.JMenuItem();
@@ -59,6 +61,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMnCadastro.add(jMnItEstado);
+
+        jMnItCidade.setText("Cidade");
+        jMnItCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnItCidadeActionPerformed(evt);
+            }
+        });
+        jMnCadastro.add(jMnItCidade);
+        jMnCadastro.add(jSeparator2);
 
         jMnItBanco.setMnemonic('B');
         jMnItBanco.setText("Banco");
@@ -140,6 +151,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
           new EstadoCons(this, true).setVisible(true);
     }//GEN-LAST:event_jMnItEstadoActionPerformed
 
+    private void jMnItCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnItCidadeActionPerformed
+          new CidadeCons(this, true).setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnItCidadeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,6 +195,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMnCadastro;
     private javax.swing.JMenuItem jMnItAgencia;
     private javax.swing.JMenuItem jMnItBanco;
+    private javax.swing.JMenuItem jMnItCidade;
     private javax.swing.JMenuItem jMnItCliente;
     private javax.swing.JMenuItem jMnItConta;
     private javax.swing.JMenuItem jMnItDeposito;
@@ -189,5 +205,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnItSaque;
     private javax.swing.JMenu jMnMovimentacao;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }

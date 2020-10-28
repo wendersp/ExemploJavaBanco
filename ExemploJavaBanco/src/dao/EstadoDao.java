@@ -15,14 +15,14 @@ import javax.swing.JOptionPane;
  * @author wender
  */
 public class EstadoDao {
-
+    
     private Connection con;
 
     private void iniciarConexaoDB() {
         ConexaoDB conexaoDB = new ConexaoDB();
         con = conexaoDB.getConexaoDB();
     }
-
+    
     public void salvar(Estado estado) {
         if (estado.getId() != null) {
             this.update(estado);

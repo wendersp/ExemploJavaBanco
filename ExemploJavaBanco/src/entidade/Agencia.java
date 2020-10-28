@@ -7,8 +7,8 @@ public class Agencia {
     private Banco banco;
     private Integer numero;
     private String nome;
-    private String estado;
-    private String cidade;
+    private Estado estado;
+    private Cidade cidade;
     private String endereco;
     private String cep;
     private String telefone;
@@ -49,21 +49,23 @@ public class Agencia {
         this.nome = nome;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
-    public String getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
+
+   
 
     public String getEndereco() {
         return endereco;

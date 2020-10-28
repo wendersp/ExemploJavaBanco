@@ -12,8 +12,6 @@ import java.awt.FontMetrics;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
 import telas.tableModel.EstadoColumnModel;
 import telas.tableModel.EstadoTableModel;
 
