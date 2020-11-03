@@ -1,7 +1,7 @@
-package telas;
+package visao;
 
-import dao.EstadoDao;
-import entidade.Estado;
+import modelo.dao.EstadoDao;
+import modelo.entidade.Estado;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 

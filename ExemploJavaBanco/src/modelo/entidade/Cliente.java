@@ -1,5 +1,5 @@
 
-package entidade;
+package modelo.entidade;
 
 import java.util.Date;
 

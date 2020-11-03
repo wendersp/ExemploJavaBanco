@@ -1,5 +1,5 @@
 
-package telas.tableModel;
+package visao.tableModel;
 
 import java.awt.FontMetrics;
 import javax.swing.table.DefaultTableColumnModel;

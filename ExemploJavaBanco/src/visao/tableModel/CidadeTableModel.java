@@ -1,7 +1,8 @@
 
-package telas.tableModel;
+package visao.tableModel;
 
-import entidade.Estado;
+import modelo.entidade.Cidade;
+import modelo.entidade.Estado;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -10,29 +11,29 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author wender
  */
-public class EstadoTableModel extends AbstractTableModel {
+public class CidadeTableModel extends AbstractTableModel {
 
-    private List<Estado> listaEstado;
+    private List<Cidade> listaCidade;
     
     private String[] colunas = new String[]{
-        "Id", "Nome", "Sigla"};
+        "Id", "Nome", "Estado"};
 
     /**
      * Creates a new instance of DevmediaTableModel
      *
-     * @param listaEstado
+     * @param listaCidade
      */
-    public EstadoTableModel(List<Estado> listaEstado) {
-        this.listaEstado = listaEstado;
+    public CidadeTableModel(List<Cidade> listaCidade) {
+        this.listaCidade = listaCidade;
     }
 
-    public EstadoTableModel() {
-        this.listaEstado = new ArrayList<>();
+    public CidadeTableModel() {
+        this.listaCidade = new ArrayList<>();
     }
 
     @Override
     public int getRowCount() {
-        return listaEstado.size();
+        return listaCidade.size();
     }
 
     @Override
@@ -50,14 +51,13 @@ public class EstadoTableModel extends AbstractTableModel {
         return String.class;
     }
 
-    public void setValueAt(Estado aValue, int rowIndex) {
-        Estado estado = listaEstado.get(rowIndex);
+    public void setValueAt(Cidade aValue, int rowIndex) {
+        Cidade cidade = listaCidade.get(rowIndex);
 
-        estado.setId(aValue.getId());
-        estado.setNome(aValue.getNome());
-        estado.setSigla(aValue.getSigla());
+        cidade.setId(aValue.getId());
+        cidade.setNome(aValue.getNome());
+        cidade.setEstado(aValue.getEstado());
         
-
         fireTableCellUpdated(rowIndex, 0);
         fireTableCellUpdated(rowIndex, 1);
         fireTableCellUpdated(rowIndex, 2);
@@ -66,15 +66,15 @@ public class EstadoTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Estado estado = listaEstado.get(rowIndex);
+        Cidade cidade = listaCidade.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                estado.setId(Integer.parseInt(aValue.toString()));
+                cidade.setId(Long.parseLong(aValue.toString()));
             case 1:
-                estado.setNome(aValue.toString());
+                cidade.setNome(aValue.toString());
             case 2:
-                estado.setSigla(aValue.toString());            
+                //cidade.setEstado(aValue.toString());            
             default:
                 System.err.println("Índice da coluna inválido");
         }
@@ -83,21 +83,21 @@ public class EstadoTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Estado estadoSelecionado = listaEstado.get(rowIndex);
+        Cidade cidadeSelecionado = listaCidade.get(rowIndex);
         String valueObject = null;
         switch (columnIndex) {
             case 0:
-                if (estadoSelecionado.getId() != null) {
-                    valueObject = String.valueOf(estadoSelecionado.getId());
+                if (cidadeSelecionado.getId() != null) {
+                    valueObject = String.valueOf(cidadeSelecionado.getId());
                 } else {
                     valueObject = "";
                 }
                 break;
             case 1:
-                valueObject = estadoSelecionado.getNome();
+                valueObject = cidadeSelecionado.getNome();
                 break;
             case 2:
-                valueObject = estadoSelecionado.getSigla();
+                valueObject = cidadeSelecionado.getEstado().getNome();
                 break;            
             default:
                 System.err.println("Índice inválido para propriedade do bean Estado.class");
@@ -116,38 +116,38 @@ public class EstadoTableModel extends AbstractTableModel {
      * @param indiceLinha
      * @return
      */
-    public Estado getEstado(int indiceLinha) {
-        return listaEstado.get(indiceLinha);
+    public Cidade getCidade(int indiceLinha) {
+        return listaCidade.get(indiceLinha);
     }
 
-    public void addEstado(Estado p) {
-        listaEstado.add(p);
+    public void addCidade(Cidade c) {
+        listaCidade.add(c);
 
         int ultimoIndice = getRowCount() - 1;
 
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
     }
 
-    public void removeEstado(int indiceLinha) {
-        listaEstado.remove(indiceLinha);
+    public void removeCidade(int indiceLinha) {
+        listaCidade.remove(indiceLinha);
 
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListaDeEstado(List<Estado> novosEstadoes) {
+    public void addListaDeCidade(List<Cidade> novasCidades) {
         limpar();
         int tamanhoAntigo = getRowCount();
-        listaEstado.addAll(novosEstadoes);
+        listaCidade.addAll(novasCidades);
         fireTableRowsInserted(tamanhoAntigo, getRowCount() - 1);
     }
 
     public void limpar() {
-        listaEstado.clear();
+        listaCidade.clear();
         fireTableDataChanged();
     }
 
     public boolean isEmpty() {
-        return listaEstado.isEmpty();
+        return listaCidade.isEmpty();
     }
 
 }

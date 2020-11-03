@@ -1,7 +1,7 @@
-package dao;
+package modelo.dao;
 
-import entidade.Cidade;
-import entidade.Estado;
+import modelo.entidade.Cidade;
+import modelo.entidade.Estado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

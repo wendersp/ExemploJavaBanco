@@ -3,27 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package telas;
+package visao;
 
-import dao.EstadoDao;
-import entidade.Cidade;
-import entidade.Estado;
+import modelo.dao.CidadeDao;
+import modelo.entidade.Cidade;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import visao.tableModel.CidadeColumnModel;
+import visao.tableModel.CidadeTableModel;
 
 /**
  *
  * @author wender
  */
-public class CidadeFrm extends javax.swing.JDialog {
+public class CidadeCons extends javax.swing.JDialog {
 
     /**
-     * Creates new form CidadeFrm
+     * Creates new form CidadeCons
      */
-    public CidadeFrm(java.awt.Frame parent, boolean modal) {
+    public CidadeCons(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.carregarComboBoxEstado();
+        this.centralizarTela();
     }
 
     /**
@@ -36,26 +40,29 @@ public class CidadeFrm extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jCboEstado = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jTxfCodigo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTxfNome = new javax.swing.JTextField();
+        jCboPesquisarPor = new javax.swing.JComboBox<>();
+        jTxfPesquisarValor = new javax.swing.JTextField();
+        jBtnPesquisar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTbCidade = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jBtnNovo = new javax.swing.JButton();
-        jBtnSalvar = new javax.swing.JButton();
-        jBtnExcluir = new javax.swing.JButton();
+        jBtnEditar = new javax.swing.JButton();
         jBtnFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro Cidade");
+        setTitle("Pesquisar Cidade");
 
-        jLabel1.setText("Estado");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
-        jLabel2.setText("Codigo");
+        jCboPesquisarPor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Codigo" }));
 
-        jLabel3.setText("Nome");
+        jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,18 +70,11 @@ public class CidadeFrm extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jCboPesquisarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTxfPesquisarValor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTxfNome)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jBtnPesquisar)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -82,18 +82,24 @@ public class CidadeFrm extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTxfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jCboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCboPesquisarPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxfPesquisarValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnPesquisar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jTbCidade.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nome", "Estado"
+            }
+        ));
+        jScrollPane1.setViewportView(jTbCidade);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -104,17 +110,10 @@ public class CidadeFrm extends javax.swing.JDialog {
             }
         });
 
-        jBtnSalvar.setText("Salvar");
-        jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEditar.setText("Editar");
+        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSalvarActionPerformed(evt);
-            }
-        });
-
-        jBtnExcluir.setText("Excluir");
-        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnExcluirActionPerformed(evt);
+                jBtnEditarActionPerformed(evt);
             }
         });
 
@@ -133,10 +132,8 @@ public class CidadeFrm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jBtnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnSalvar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(jBtnEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnFechar)
                 .addContainerGap())
         );
@@ -146,8 +143,7 @@ public class CidadeFrm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNovo)
-                    .addComponent(jBtnSalvar)
-                    .addComponent(jBtnExcluir)
+                    .addComponent(jBtnEditar)
                     .addComponent(jBtnFechar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -160,6 +156,7 @@ public class CidadeFrm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -168,7 +165,9 @@ public class CidadeFrm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -176,20 +175,20 @@ public class CidadeFrm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+          botaoPesquisar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
+
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
-        this.botaoNovo();
+        botaoNovo();        // TODO add your handling code here:
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
-    private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
-        this.botaoSalvar();        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnSalvarActionPerformed
-
-    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        this.botaoExcluir();        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnExcluirActionPerformed
+    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        botaoEditar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFecharActionPerformed
-        this.botaoFechar();        // TODO add your handling code here:
+        botaoFechar();        // TODO add your handling code here:
     }//GEN-LAST:event_jBtnFecharActionPerformed
 
     /**
@@ -209,20 +208,20 @@ public class CidadeFrm extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CidadeFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CidadeCons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CidadeFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CidadeCons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CidadeFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CidadeCons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CidadeFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CidadeCons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CidadeFrm dialog = new CidadeFrm(new javax.swing.JFrame(), true);
+                CidadeCons dialog = new CidadeCons(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -235,65 +234,92 @@ public class CidadeFrm extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnExcluir;
+    private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnFechar;
     private javax.swing.JButton jBtnNovo;
-    private javax.swing.JButton jBtnSalvar;
-    private javax.swing.JComboBox<String> jCboEstado;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jBtnPesquisar;
+    private javax.swing.JComboBox<String> jCboPesquisarPor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTxfCodigo;
-    private javax.swing.JTextField jTxfNome;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTbCidade;
+    private javax.swing.JTextField jTxfPesquisarValor;
     // End of variables declaration//GEN-END:variables
 
-    private Cidade cidade;
-    private EstadoDao estadoDao;
+    private CidadeDao cidadeDao;
+    private List<Cidade> listaCidade;
+    private CidadeFrm cidadeFrm;
     
-    /*-----------[preencher a ComboBox Estado---------------------------------*/
-    private DefaultComboBoxModel comboBoxModel;
     
-    private void carregarComboBoxEstado() {
-        if (estadoDao == null) {
-            estadoDao = new EstadoDao();
-        }
-        List<Estado> listaEstado = estadoDao.pesquisar("");
-        comboBoxModel = (DefaultComboBoxModel) jCboEstado.getModel();
-        comboBoxModel.removeAllElements();
-        for (int linha = 0; linha < listaEstado.size(); linha++) {
-            Estado estado = listaEstado.get(linha);
-            comboBoxModel.addElement(estado);
-        }
-        jCboEstado.setModel(comboBoxModel);
+    private void centralizarTela() {
+        Dimension tamanhoTela = getToolkit().getScreenSize();
+        Dimension tamanho = getSize();
+        setLocation((tamanhoTela.width - tamanho.width) / 2, 90);
     }
     
-    private Estado getEstadoSelecionado() {
-        return (Estado) jCboEstado.getSelectedItem();
+    private void formatarColumnJTable() {
+        FontMetrics fm = jTbCidade.getFontMetrics(jTbCidade.getFont());
+        jTbCidade.setColumnModel(new CidadeColumnModel(fm));
     }
-    /*------------------------------------------------------------------------*/
     
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
+    /*
+    adicionar a lista de estado no JTable
+    */
+    private CidadeTableModel model = new CidadeTableModel();    
+    private void setListaCidade(List<Cidade> listaCidade) {        
+        this.jTbCidade.setModel(model);        
+        model.addListaDeCidade(listaCidade);        
+        this.formatarColumnJTable();
+    }
+    /*
+    pegar o cidade selecionado no JTable
+    */
+    public Cidade getCidadeSelecionado() {
+        return model.getCidade(jTbCidade.getSelectedRow());
+    }
+    
+    
+    private String param[] = new String[2];    
+    private void getParametroPesquisa() {        
+        param[0] = jCboPesquisarPor.getSelectedItem().toString().toUpperCase();
+        param[1] = jTxfPesquisarValor.getText().toUpperCase();        
+    }
+    
+    
+    private void botaoPesquisar() {
+        getParametroPesquisa();
+        if (this.cidadeDao == null) {
+            this.cidadeDao = new CidadeDao();
+        }
+        this.listaCidade = new ArrayList<>();
+        
+        if (param[0].equals("CODIGO")) {
+            this.listaCidade.add(this.cidadeDao.pesquisar(Long.parseLong(param[1])));
+        } else {
+            this.listaCidade = this.cidadeDao.pesquisar(param[1]);
+        }
+        this.setListaCidade(this.listaCidade);
+    }
+    
+    private void botaoFechar(){
+        dispose();
     }
     
     private void botaoNovo() {
-        
+        if (this.cidadeFrm == null) {
+            cidadeFrm = new CidadeFrm(new JFrame(), true);
+        }
+        cidadeFrm.setCidade(new Cidade());
+        cidadeFrm.setVisible(true);
     }
     
-    private void botaoSalvar() {
-        
+    private void botaoEditar() {
+        if (this.cidadeFrm == null) {
+            cidadeFrm = new CidadeFrm(new JFrame(), true);
+        }
+        cidadeFrm.setCidade(getCidadeSelecionado());
+        cidadeFrm.setVisible(true);
     }
-    
-    private void botaoExcluir() {
-        
-    }
-    
-    private void botaoFechar() {
-        this.dispose();
-    }
-    
-    
+
 
 }

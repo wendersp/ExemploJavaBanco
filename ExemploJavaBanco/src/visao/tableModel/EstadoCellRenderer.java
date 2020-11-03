@@ -1,13 +1,13 @@
-package telas.tableModel;
+package visao.tableModel;
 
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class CidadeCellRenderer extends DefaultTableCellRenderer {
+public class EstadoCellRenderer extends DefaultTableCellRenderer {
 
-    public CidadeCellRenderer() {
+    public EstadoCellRenderer() {
         super();
     }
 

@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package telas;
+package visao;
 
-import dao.EstadoDao;
-import entidade.Estado;
+import modelo.dao.EstadoDao;
+import modelo.entidade.Estado;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
-import telas.tableModel.EstadoColumnModel;
-import telas.tableModel.EstadoTableModel;
+import visao.tableModel.EstadoColumnModel;
+import visao.tableModel.EstadoTableModel;
 
 /**
  *
