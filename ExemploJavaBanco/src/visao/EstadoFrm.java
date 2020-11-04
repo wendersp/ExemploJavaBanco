@@ -249,19 +249,18 @@ public class EstadoFrm extends javax.swing.JDialog {
 
     private Estado estado;
     private EstadoDao estadoDao;
-    
+
     private void centralizarTela() {
         Dimension tamanhoTela = getToolkit().getScreenSize();
         Dimension tamanho = getSize();
         setLocation((tamanhoTela.width - tamanho.width) / 2, 90);
     }
-    
-    
+
     public void setEstado(Estado estado) {
         this.estado = estado;
-        mostrarDadosFrom();        
+        mostrarDadosFrom();
     }
-    
+
     private void iniciarForm() {
         this.centralizarTela();
         estado = new Estado();
@@ -270,11 +269,11 @@ public class EstadoFrm extends javax.swing.JDialog {
         jBtnSalvar.setEnabled(true);
         jBtnExcluir.setEnabled(false);
     }
-    
+
     private void botaoFechar() {
         this.dispose();
     }
-    
+
     private void botaoNovo() {
         estado = new Estado();
         jBtnNovo.setEnabled(false);
@@ -282,35 +281,37 @@ public class EstadoFrm extends javax.swing.JDialog {
         jBtnExcluir.setEnabled(false);
         mostrarDadosFrom();
     }
-    
+
     private void botaoSalvar() {
         if (estadoDao == null) {
             estadoDao = new EstadoDao();
         }
         obterDadosFrom();
-        if ((estado.getNome() != null) && (!estado.getNome().isEmpty())) {
+        if ((estado.getNome() == null) || (estado.getNome().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Informe o nome do estado.");
+        } else if ((estado.getSigla() == null) || (estado.getSigla().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Informe a sigla do estado.");
+        } else {
             estadoDao.salvar(estado);
             botaoNovo();
-        } else {
-            JOptionPane.showMessageDialog(null, "Informe o nome do estado.");
         }
-        
+
     }
-    
+
     private void botaoExcluir() {
         if (estadoDao == null) {
             estadoDao = new EstadoDao();
         }
         estadoDao.excluir(estado);
-        
+
         jBtnNovo.setEnabled(false);
         jBtnSalvar.setEnabled(true);
         jBtnExcluir.setEnabled(false);
         estado = new Estado();
-        
+
         limparDadosFrom();
     }
-    
+
     private void mostrarDadosFrom() {
         if (estado != null) {
             if (this.estado.getId() != null) {
@@ -333,16 +334,16 @@ public class EstadoFrm extends javax.swing.JDialog {
             jBtnExcluir.setEnabled(false);
         }
     }
-    
+
     private void obterDadosFrom() {
         estado.setNome(jTxfNome.getText());
         estado.setSigla(jTxfSigla.getText());
     }
-    
+
     private void limparDadosFrom() {
         jTxfCodigo.setText("");
         jTxfNome.setText("");
         jTxfSigla.setText("");
     }
-    
+
 }

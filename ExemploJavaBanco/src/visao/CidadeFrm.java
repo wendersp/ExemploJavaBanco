@@ -5,11 +5,13 @@
  */
 package visao;
 
+import java.awt.Dimension;
 import modelo.dao.EstadoDao;
 import modelo.entidade.Cidade;
 import modelo.entidade.Estado;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import modelo.dao.CidadeDao;
 
 /**
  *
@@ -23,7 +25,8 @@ public class CidadeFrm extends javax.swing.JDialog {
     public CidadeFrm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.carregarComboBoxEstado();
+        this.iniciarForm();
+        
     }
 
     /**
@@ -54,6 +57,8 @@ public class CidadeFrm extends javax.swing.JDialog {
         jLabel1.setText("Estado");
 
         jLabel2.setText("Codigo");
+
+        jTxfCodigo.setEditable(false);
 
         jLabel3.setText("Nome");
 
@@ -250,10 +255,24 @@ public class CidadeFrm extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private Cidade cidade;
+    private CidadeDao cidadeDao;
     private EstadoDao estadoDao;
     
     /*-----------[preencher a ComboBox Estado---------------------------------*/
     private DefaultComboBoxModel comboBoxModel;
+    
+    private void iniciarForm() {
+        centralizarTela();
+        this.carregarComboBoxEstado();
+        
+    }
+    
+    
+    private void centralizarTela() {
+        Dimension tamanhoTela = getToolkit().getScreenSize();
+        Dimension tamanho = getSize();
+        setLocation((tamanhoTela.width - tamanho.width) / 2, 90);
+    }
     
     private void carregarComboBoxEstado() {
         if (estadoDao == null) {
@@ -274,20 +293,53 @@ public class CidadeFrm extends javax.swing.JDialog {
     }
     /*------------------------------------------------------------------------*/
     
+    private void mostrarDadosTela() {
+        this.carregarComboBoxEstado();
+        if (this.cidade.getId() != null) {
+        jTxfCodigo.setText(String.valueOf(this.cidade.getId()));
+        } else {
+            jTxfCodigo.setText("");
+        }
+        jTxfNome.setText(this.cidade.getNome());
+        jCboEstado.setSelectedItem(this.cidade.getEstado());
+        
+    }
+    
+    private void obterDadosTela() {
+        if (this.cidade == null) {
+            this.cidade = new Cidade();
+        }
+        this.cidade.setNome(jTxfNome.getText());
+        this.cidade.setEstado(this.getEstadoSelecionado());
+        
+    }
+    
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+        this.mostrarDadosTela();
     }
     
     private void botaoNovo() {
-        
+        this.cidade = new Cidade();
+        this.mostrarDadosTela();
     }
     
     private void botaoSalvar() {
-        
+        if (this.cidadeDao == null) {
+            this.cidadeDao = new CidadeDao();
+        }
+        this.obterDadosTela();
+        this.cidadeDao.salvar(cidade);  
+        this.botaoNovo();
     }
     
     private void botaoExcluir() {
-        
+        if (this.cidadeDao == null) {
+            this.cidadeDao = new CidadeDao();
+        }
+        this.obterDadosTela();
+        this.cidadeDao.excluir(cidade); 
+        this.botaoNovo();
     }
     
     private void botaoFechar() {

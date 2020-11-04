@@ -6,6 +6,7 @@
 package visao;
 
 import java.awt.Dimension;
+import modelo.entidade.Usuario;
 
 /**
  *
@@ -207,4 +208,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
+
+    private Usuario usuarioLogado;
+    
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+        this.setTitle(this.getTitle() + " - " + this.usuarioLogado.getNome());
+    }
+
 }
