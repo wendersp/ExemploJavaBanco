@@ -4,6 +4,7 @@ package modelo.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,13 +22,13 @@ public class ConexaoDB {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            System.out.println("Drive JDBC não existe.");
+            JOptionPane.showMessageDialog(null,"Drive JDBC não existe. - " + ex.getMessage());
             return null;
         }      
         try {
             con = DriverManager.getConnection("jdbc:mysql://" + SERVIDOR_DB + ":3306/" + NOME_DB, USER_DB, SENHA_DB);
         } catch (SQLException ex) {
-            System.out.println("Error ao conectar com o banco de dados. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error ao conectar com o banco de dados. " + ex.getMessage());
             return null;
         }
         return con;
