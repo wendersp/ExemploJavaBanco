@@ -5,6 +5,13 @@
  */
 package visao;
 
+import java.awt.Dimension;
+import javax.swing.JOptionPane;
+import modelo.dao.BancoDao;
+import modelo.dao.EstadoDao;
+import modelo.entidade.Banco;
+import modelo.entidade.Estado;
+
 /**
  *
  * @author wender
@@ -16,7 +23,8 @@ public class BancoFrm extends javax.swing.JDialog {
      */
     public BancoFrm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        initComponents();        
+        iniciarForm();
     }
 
     /**
@@ -90,10 +98,25 @@ public class BancoFrm extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jBtnNovo.setText("Novo");
+        jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoActionPerformed(evt);
+            }
+        });
 
         jBtnSalvar.setText("Salvar");
+        jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarActionPerformed(evt);
+            }
+        });
 
         jBtnExcluir.setText("Excluir");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
 
         jBtnFechar.setText("Fechar");
         jBtnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,8 +179,20 @@ public class BancoFrm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFecharActionPerformed
-         dispose();
+         botaoFechar();
     }//GEN-LAST:event_jBtnFecharActionPerformed
+
+    private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
+        botaoNovo();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnNovoActionPerformed
+
+    private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
+    botaoSalvar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnSalvarActionPerformed
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        botaoExcluir();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,4 +250,107 @@ public class BancoFrm extends javax.swing.JDialog {
     private javax.swing.JTextField jTxFNumero;
     private javax.swing.JTextField jTxfCodigo;
     // End of variables declaration//GEN-END:variables
+
+    private BancoDao bancoDao;
+    private Banco banco;
+    
+    public void setBanco(Banco banco) {
+        this.banco = banco;
+        mostrarDadosFrom();
+    }
+    
+    private void iniciarForm() {
+        this.centralizarTela();
+        banco = new Banco();
+        limparDadosFrom();
+        jBtnNovo.setEnabled(false);
+        jBtnSalvar.setEnabled(true);
+        jBtnExcluir.setEnabled(false);
+    }
+    
+     private void limparDadosFrom() {
+        jTxfCodigo.setText("");
+        jTxFNumero.setText("");
+        jTxFNome.setText("");        
+    }
+    
+    private void centralizarTela() {
+        Dimension tamanhoTela = getToolkit().getScreenSize();
+        Dimension tamanho = getSize();
+        setLocation((tamanhoTela.width - tamanho.width) / 2, 90);
+    }
+    
+    private void botaoFechar() {
+        this.dispose();
+    }
+
+    private void botaoNovo() {
+        banco = new Banco();
+        jBtnNovo.setEnabled(false);
+        jBtnSalvar.setEnabled(true);
+        jBtnExcluir.setEnabled(false);
+        mostrarDadosFrom();
+    }
+
+    private void botaoSalvar() {
+        if (bancoDao == null) {
+            bancoDao = new BancoDao();
+        }
+        obterDadosFrom();
+        if ((banco.getNumero() == null)) {
+            JOptionPane.showMessageDialog(null, "Informe o numero do Banco.");
+        } else if ((banco.getNome() == null) || (banco.getNome().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Informe o nome do Banco.");
+        } else {
+            bancoDao.salvar(banco);
+            botaoNovo();
+        }
+
+    }
+
+    private void botaoExcluir() {
+        if (bancoDao == null) {
+            bancoDao = new BancoDao();
+        }
+        bancoDao.excluir(banco);
+
+        jBtnNovo.setEnabled(false);
+        jBtnSalvar.setEnabled(true);
+        jBtnExcluir.setEnabled(false);
+        banco = new Banco();
+
+        limparDadosFrom();
+    }
+
+    private void mostrarDadosFrom() {
+        if (banco != null) {
+            if (this.banco.getId() != null) {
+                jTxfCodigo.setText(String.valueOf(banco.getId()));
+            } else {
+                jTxfCodigo.setText("");
+            }
+            jTxFNumero.setText(String.valueOf(banco.getNumero()));
+            jTxFNome.setText(banco.getNome());            
+        } else {
+            limparDadosFrom();
+        }
+        if (this.banco.getId() != null) {
+            jBtnNovo.setEnabled(true);
+            jBtnSalvar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+        } else {
+            jBtnNovo.setEnabled(false);
+            jBtnSalvar.setEnabled(true);
+            jBtnExcluir.setEnabled(false);
+        }
+    }
+
+    private void obterDadosFrom() {
+        banco.setNumero(Integer.parseInt(jTxFNumero.getText()));
+        banco.setNome(jTxFNome.getText());        
+    }
+    
+    
+    
+
 }

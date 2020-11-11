@@ -41,7 +41,6 @@ public class EstadoDao {
             pstmt.setString(1, estado.getNome());
             pstmt.setString(2, estado.getSigla());
             pstmt.execute();
-            //System.out.println("Estado inserido com sucesso!...");
             JOptionPane.showMessageDialog(null,"Estado inserido com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao inserir o estado. " + ex.getMessage());

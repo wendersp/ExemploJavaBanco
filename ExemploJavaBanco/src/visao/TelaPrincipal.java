@@ -140,8 +140,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMnItSairActionPerformed
 
     private void jMnItBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnItBancoActionPerformed
-        BancoFrm bancoFrm = new BancoFrm(this, true);
-        bancoFrm.setVisible(true);
+        BancoCons bancoCons = new BancoCons(this, true);
+        bancoCons.setVisible(true);
     }//GEN-LAST:event_jMnItBancoActionPerformed
 
     private void jMnItAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnItAgenciaActionPerformed

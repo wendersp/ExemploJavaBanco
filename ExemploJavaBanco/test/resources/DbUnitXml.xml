@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
- 
-<dataset>
-  <estado id="1" nome="TEST 01" sigla="T1" />
-  <estado id="2" nome="TEST 02" sigla="T2" />
-  
-</dataset>
