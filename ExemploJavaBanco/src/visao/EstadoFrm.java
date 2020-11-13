@@ -4,6 +4,7 @@ import modelo.dao.EstadoDao;
 import modelo.entidade.Estado;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
+import uteis.Uteis;
 
 /**
  *
@@ -36,6 +37,8 @@ public class EstadoFrm extends javax.swing.JDialog {
         jTxfCodigo = new javax.swing.JTextField();
         jTxfNome = new javax.swing.JTextField();
         jTxfSigla = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jFTxfData = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jBtnNovo = new javax.swing.JButton();
         jBtnSalvar = new javax.swing.JButton();
@@ -55,6 +58,14 @@ public class EstadoFrm extends javax.swing.JDialog {
 
         jTxfCodigo.setEditable(false);
 
+        jLabel4.setText("Data");
+
+        try {
+            jFTxfData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,9 +81,14 @@ public class EstadoFrm extends javax.swing.JDialog {
                     .addComponent(jTxfNome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxfSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 296, Short.MAX_VALUE)))
+                            .addComponent(jTxfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTxfSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFTxfData, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,7 +105,9 @@ public class EstadoFrm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTxfSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxfSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jFTxfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -237,9 +255,11 @@ public class EstadoFrm extends javax.swing.JDialog {
     private javax.swing.JButton jBtnFechar;
     private javax.swing.JButton jBtnNovo;
     private javax.swing.JButton jBtnSalvar;
+    private javax.swing.JFormattedTextField jFTxfData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTxfCodigo;
@@ -321,6 +341,7 @@ public class EstadoFrm extends javax.swing.JDialog {
             }
             jTxfNome.setText(estado.getNome());
             jTxfSigla.setText(estado.getSigla());
+            jFTxfData.setText(Uteis.parseDate(estado.getData()));
         } else {
             limparDadosFrom();
         }
@@ -338,6 +359,7 @@ public class EstadoFrm extends javax.swing.JDialog {
     private void obterDadosFrom() {
         estado.setNome(jTxfNome.getText());
         estado.setSigla(jTxfSigla.getText());
+        estado.setData(Uteis.parseDate(jFTxfData.getText()));
     }
 
     private void limparDadosFrom() {

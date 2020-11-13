@@ -1,10 +1,10 @@
-
 package visao.tableModel;
 
 import modelo.entidade.Estado;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import uteis.Uteis;
 
 /**
  *
@@ -13,9 +13,8 @@ import javax.swing.table.AbstractTableModel;
 public class EstadoTableModel extends AbstractTableModel {
 
     private List<Estado> listaEstado;
-    
-    private String[] colunas = new String[]{
-        "Id", "Nome", "Sigla"};
+
+    private String[] colunas = new String[]{"Id", "Nome", "Sigla", "Data"};
 
     /**
      * Creates a new instance of DevmediaTableModel
@@ -36,7 +35,7 @@ public class EstadoTableModel extends AbstractTableModel {
     }
 
     @Override
-    public int getColumnCount() {
+    public int getColumnCount() {        
         return colunas.length;
     }
 
@@ -56,12 +55,13 @@ public class EstadoTableModel extends AbstractTableModel {
         estado.setId(aValue.getId());
         estado.setNome(aValue.getNome());
         estado.setSigla(aValue.getSigla());
-        
+        estado.setData(aValue.getData());
 
         fireTableCellUpdated(rowIndex, 0);
         fireTableCellUpdated(rowIndex, 1);
         fireTableCellUpdated(rowIndex, 2);
-        
+        fireTableCellUpdated(rowIndex, 3);
+
     }
 
     @Override
@@ -71,10 +71,16 @@ public class EstadoTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 estado.setId(Integer.parseInt(aValue.toString()));
+                break;
             case 1:
                 estado.setNome(aValue.toString());
+                break;
             case 2:
-                estado.setSigla(aValue.toString());            
+                estado.setSigla(aValue.toString());
+                break;
+            case 3:
+                estado.setData(Uteis.parseDate(aValue.toString()));
+                break;
             default:
                 System.err.println("Índice da coluna inválido");
         }
@@ -84,7 +90,7 @@ public class EstadoTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Estado estadoSelecionado = listaEstado.get(rowIndex);
-        String valueObject = null;
+        String valueObject = null;        
         switch (columnIndex) {
             case 0:
                 if (estadoSelecionado.getId() != null) {
@@ -98,7 +104,10 @@ public class EstadoTableModel extends AbstractTableModel {
                 break;
             case 2:
                 valueObject = estadoSelecionado.getSigla();
-                break;            
+                break;
+            case 3:
+                valueObject = Uteis.parseDate(estadoSelecionado.getData());
+                break;
             default:
                 System.err.println("Índice inválido para propriedade do bean Estado.class");
         }

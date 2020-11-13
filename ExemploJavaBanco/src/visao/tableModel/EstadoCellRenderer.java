@@ -41,7 +41,7 @@ public class EstadoCellRenderer extends DefaultTableCellRenderer {
                 label.setHorizontalAlignment(LEFT);
                 break;
             case 2:
-                label.setHorizontalAlignment(CENTER);
+                label.setHorizontalAlignment(LEFT);
                 break;            
             default:
                 label.setHorizontalAlignment(LEFT);

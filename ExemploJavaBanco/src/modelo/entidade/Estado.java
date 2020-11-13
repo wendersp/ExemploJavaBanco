@@ -1,6 +1,7 @@
 
 package modelo.entidade;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,6 +13,7 @@ public class Estado {
     private Integer id;
     private String nome;
     private String sigla;
+    private Date data;
 
     public Integer getId() {
         return id;
@@ -37,6 +39,16 @@ public class Estado {
         this.sigla = sigla;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    
+    
     @Override
     public String toString() {
         return nome;

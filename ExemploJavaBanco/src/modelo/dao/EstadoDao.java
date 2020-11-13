@@ -34,12 +34,13 @@ public class EstadoDao {
     
     private void insert(Estado estado) {
         iniciarConexaoDB();
-        String sql = "INSERT INTO estado (nome, sigla)"
-                + " VALUES (?,?)";
+        String sql = "INSERT INTO estado (nome, sigla, data)"
+                + " VALUES (?,?,?)";
         try {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, estado.getNome());
             pstmt.setString(2, estado.getSigla());
+            pstmt.setDate(3, new java.sql.Date(estado.getData().getTime()));
             pstmt.execute();
             JOptionPane.showMessageDialog(null,"Estado inserido com sucesso!");
         } catch (SQLException ex) {
@@ -49,13 +50,14 @@ public class EstadoDao {
 
     private void update(Estado estado) {
          iniciarConexaoDB();
-        String sql = "UPDATE estado SET nome = ?, sigla = ? "
+        String sql = "UPDATE estado SET nome = ?, sigla = ?, data = ? "
                 + " WHERE id = ?";
         try {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, estado.getNome());
             pstmt.setString(2, estado.getSigla());
-            pstmt.setInt(3, estado.getId());
+            pstmt.setDate(3, new java.sql.Date(estado.getData().getTime()));
+            pstmt.setInt(4, estado.getId());
             pstmt.execute();
             JOptionPane.showMessageDialog(null,
                     "Estado atualizado com sucesso");
@@ -82,7 +84,7 @@ public class EstadoDao {
     public Estado pesquisar(int id) {
         iniciarConexaoDB();
         Estado estado = null;
-        String sql = "SELECT id, nome, sigla FROM estado WHERE id = ?";
+        String sql = "SELECT id, nome, sigla, data FROM estado WHERE id = ?";
         try {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -91,7 +93,8 @@ public class EstadoDao {
                 estado = new Estado();
                 estado.setId(resultado.getInt("id"));
                 estado.setNome(resultado.getString("nome"));
-                estado.setSigla(resultado.getString("sigla"));                 
+                estado.setSigla(resultado.getString("sigla"));   
+                estado.setData(resultado.getDate("data"));
             }
             return estado;
         } catch (SQLException ex) {
@@ -104,7 +107,7 @@ public class EstadoDao {
         iniciarConexaoDB();
         Estado estado;
         List<Estado> lstEstados = new ArrayList();
-        String sql = "SELECT id, nome, sigla FROM estado WHERE nome LIKE ?";
+        String sql = "SELECT id, nome, sigla, data FROM estado WHERE nome LIKE ?";
         try {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, nome + "%");
@@ -114,6 +117,7 @@ public class EstadoDao {
                 estado.setId(resultado.getInt("id"));
                 estado.setNome(resultado.getString("nome"));
                 estado.setSigla(resultado.getString("sigla"));  
+                estado.setData(resultado.getDate("data"));
                 lstEstados.add(estado);
             }
             return lstEstados;
@@ -127,7 +131,7 @@ public class EstadoDao {
         iniciarConexaoDB();
         Estado estado;
         List<Estado> lstEstados = new ArrayList();
-        String sql = "SELECT id, nome, sigla FROM estado WHERE sigla = ?";
+        String sql = "SELECT id, nome, sigla, data FROM estado WHERE sigla = ?";
         try {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, sigla);
@@ -136,7 +140,8 @@ public class EstadoDao {
                 estado = new Estado();
                 estado.setId(resultado.getInt("id"));
                 estado.setNome(resultado.getString("nome"));
-                estado.setSigla(resultado.getString("sigla"));  
+                estado.setSigla(resultado.getString("sigla"));
+                estado.setData(resultado.getDate("data"));
                 lstEstados.add(estado);
             }
             return lstEstados;

@@ -91,13 +91,13 @@ public class EstadoCons extends javax.swing.JDialog {
 
         jTbEstado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Sigla"
+                "Código", "Nome", "Sigla", "Data"
             }
         ));
         jScrollPane1.setViewportView(jTbEstado);

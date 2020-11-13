@@ -11,6 +11,7 @@ public class EstadoColumnModel extends DefaultTableColumnModel {
         addColumn(criaColuna(0, 80, fm, false, "Código"));
         addColumn(criaColuna(1, 200, fm, true, "Nome"));
         addColumn(criaColuna(2, 80, fm, false, "Sigla"));                       
+        addColumn(criaColuna(2, 100, fm, false, "Data"));                       
     }
 
     private TableColumn criaColuna(int columnIndex, int largura, FontMetrics fm, boolean resizable, String titulo) {
